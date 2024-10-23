@@ -1,51 +1,69 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import css from "./main.module.css"; // Đảm bảo file CSS được import
+import styles from "./main.module.css"; // Ensure the CSS file is imported
 
 const Main = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Gửi yêu cầu đến backend
+    // Send request to backend
     axios
       .get("http://localhost:5000/api/data")
       .then((response) => {
         console.log(response.data);
         if (Array.isArray(response.data)) {
-          setData(response.data); // Thay đổi state 'data' thành dữ liệu trả về từ backend
+          setData(response.data); // Update 'data' state with the response from the backend
         } else {
-          console.error("API không trả về mảng như mong đợi!");
+          console.error("API did not return an array as expected!");
         }
       })
       .catch((error) => {
         console.error("There was an error fetching the data!", error);
       });
-  }, []); // [] đảm bảo useEffect chỉ chạy 1 lần sau khi render component
+  }, []); // [] ensures useEffect only runs once after the component renders
 
   return (
-    <div className={css.container}>
-      {data.length > 0 ? (
-        data.map((item, index) => (
-          <div key={index} className={css.card}>
-            <div className={css.card__Header}>
-              <h1>{item.title}</h1>
-            </div>
-            <div className={css.card__Image}>
-              <img src={item.imageUrl} alt={item.title} />
-            </div>
-            <div className={css.card__Content}>
-              <h2>{item.subheading}</h2>
-              <p>{item.content}</p>
-            </div>
-            <div className={css.card__Actions}>
-              <button className={css.btn}>Action 1</button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>Không có dữ liệu để hiển thị!</p>
-      )}
-    </div>
+    <main className={styles.main}>
+      {/* <header className={styles.mainHeader}>
+        <nav className={styles.mainHeader__nav}>
+          <ul className={styles.mainHeader__itemList}>
+            <li className={styles.mainHeader__item}>
+              <a href="/" className={styles.active}>Home</a>
+            </li>
+            <li className={styles.mainHeader__item}>
+              <a href="/about">About</a>
+            </li>
+            <li className={styles.mainHeader__item}>
+              <a href="/contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </header> */}
+
+      <section className={styles.grid}>
+        {data.length > 0 ? (
+          data.map((item, index) => (
+            <article key={index} className={styles.card}>
+              <div className={styles.card__header}>
+                <h1>{item.title}</h1>
+              </div>
+              <div className={styles.card__image}>
+                <img src={item.imageUrl} alt={item.title} />
+              </div>
+              <div className={styles.card__content}>
+                <h2> ${item.price}</h2>
+                <p>{item.description}</p>
+              </div>
+              <div className={styles.card__actions}>
+                <button className={styles.btn}>Add To Cart</button>
+              </div>
+            </article>
+          ))
+        ) : (
+          <p>No data available</p>
+        )}
+      </section>
+    </main>
   );
 };
 
