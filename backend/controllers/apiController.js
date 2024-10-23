@@ -5,7 +5,7 @@ exports.getData = (req, res) => {
     console.log(data);
     if (!data) return res.status(404).send("Data not found");
 
-    console.log(data, "data");
+    // console.log(data, "data");
     res.send(data);
   } catch (error) {
     console.error("Error loading data:", error);
