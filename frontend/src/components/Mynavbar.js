@@ -8,12 +8,12 @@ const MyNavbar = () => {
     <>
       <NavbarBootstrap bg="primary" data-bs-theme="dark">
         <Container>
-          <NavbarBootstrap.Brand href="#home">Show</NavbarBootstrap.Brand>
+          <NavbarBootstrap.Brand href="/">Show</NavbarBootstrap.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Products</Nav.Link>
+            <Nav.Link href="/">Products</Nav.Link>
             <Nav.Link href="#features">Cart</Nav.Link>
             <Nav.Link href="#pricing">Orders</Nav.Link>
-            <Nav.Link href="#pricing">Add Product</Nav.Link>
+            <Nav.Link href="/add-product">Add Product</Nav.Link>
             <Nav.Link href="#pricing">Admin Products</Nav.Link>
           </Nav>
         </Container>

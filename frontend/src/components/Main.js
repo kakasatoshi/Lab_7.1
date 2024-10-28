@@ -8,7 +8,7 @@ const Main = () => {
   useEffect(() => {
     // Send request to backend
     axios
-      .get("http://localhost:5000/api/data")
+      .get("http://localhost:5000/api/product")
       .then((response) => {
         console.log(response.data);
         if (Array.isArray(response.data)) {
